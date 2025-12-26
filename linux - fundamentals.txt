@@ -1,0 +1,109 @@
+Fundamentals of linux:
+=======================
+
+what is os?
+operating system is a intermediate software layer which acts as bridge between hardware and software or user and hardware. 
+
+
+
+HISTORY OF Linux 
+=================
+
+  Before Linux – UNIX (1960s–1970s)
+  --------------------------------
+> Linux is inspired by UNIX, an operating system developed in the 1960s at Bell Labs.
+> UNIX was powerful and stable but not free and mostly used in universities and big companies.
+
+  Minix (1970-1980s)
+  -----------------
+> Minix is developed based on UNIX operating system..It is a small os which is helpful for studenta and opensource.
+ 
+  Windows (1980s)
+  --------------
+> Microsoft Windows is a graphical operating system developed by Microsoft.
+  
+    🖥️ User-friendly GUI
+    🔐 Good security (Defender, BitLocker)
+    📦 Wide software support
+    🧑‍💻 Best for beginners
+    🎮 Strong gaming support
+	
+	
+  Linux (1990s)
+  ------------
+  Birth of Linux (1991)
+> In 1991, a student named Linus Torvalds from Finland created a kernel as a hobby project.
+> He announced it on the internet as a free alternative to UNIX.
+> This kernel was named Linux 🐧.
+
+ Why Linux is Important??
+
+✔ Free & Open Source
+✔ Secure & Stable
+✔ Highly customizable
+✔ Best for servers, cloud, and DevOps.
+OPEN SOURCE: open source means a software whose code is open and free for everyone to use, see, change and share.
+
+
+
+STRUCTURE OF LINUX:
+==================
++-------------------------------------------------+
+|   User Applications (ls,cp,vim,docker)          |
++-------------------------------------------------+
+|   Shell (Interface between user and kernel..    |
++-------------------------------------------------+
+|   System Call Layer (grep,systemctl,openssl)    |
++-------------------------------------------------+
+|   Linux Kernel(process Mangement,Memory management,file management, Network management|
++-------------------------------------------------+
+|   Hardware (CPU,Ram,Disk,network)               |
++-------------------------------------------------+
+
+
+
+DISTRIBUTIONS OF Linux:
+======================
+There are different distributions in linux..some of them are
+> Debian based and RPM based
+
+1️⃣ Debian Family
+---------------
+> Debian – Very stable
+> Ubuntu – Beginner-friendly
+> Linux Mint – Windows-like UI
+ 📦 Package manager: apt
+ 
+2️⃣ Red Hat Family
+----------------
+> RedHat Enterprise Linux – Enterprise use
+> CentOS – Community version
+> Fedora – Cutting-edge features
+📦 Package manager: dnf / yum
+
+
+What is package manager??
+It is helpful for managing the packages (python,Java..) i.e.,deploying, upgrading, deleting and maintaining the packages..
+
+
+
+BASIC LINUX COMMANDS:
+====================
+uname - for knowing the system informantion. (linux)
+man   - (manual) it will give the informantion about the particular commands.
+man uname - it'll give the information about uname.
+whoami - to see which user logged in.
+hostname - to know the server name.
+hostname -I  - it shows the ip adresss
+pwd - it'll show the present working directory.
+su - to switch the user.
+sudo - do as super user we can get good clarity about it in user management.
+ls /- listing the files and directories.
+cd /- to change the directory.
+cd .. - cd .. moves you one directory back (up).
+ls -l -long listing.
+ls -lh - long listing in human readable format.
+ls -lht -long listing..human readable..time order..
+ls -lhtr -long listing.. human readable..but in reverse time order..
+cat - cat is a command used to concatinating the file and printing the standard output..
+cat /etc/os-release - for os details.
