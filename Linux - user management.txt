@@ -1,0 +1,117 @@
+USER MANANGEMENT:
+================
+
+What is user management ??
+User management in Linux is used to create, delete, and maintain user accounts.
+It helps the system administrator to control who can access the system and what actions they can perform.
+
+
+Why Companies Need User Management ??
+
+1️. Security 🔐:
+   ------------
+  Company data is very important.
+  Without user management:
+> Any employee could see salaries
+> Anyone could delete data
+> High risk of data leak
+
+
+2. Right Access to Right Person:
+   ----------------------------
+
+Only give necessary access.
+Example:
+> Developer ❌ should not access HR payroll
+> HR ❌ should not access production servers
+
+     Each role needs different access.
+
+            Role			What they can access
+           ------------------------------------------
+		    HR	            Employee details, salary
+            Developer	    Code, servers
+            Tester	        Testing tools
+            Manager        	Reports
+            Admin	        Everything
+			
+> sudo - do as a super user.. other than root user remaining all users are non root users(normal users) then don't have control on system they 
+         only have control on home directory..		
+			
+> If a normal users wants to execute system related permissions they have to use this sudo permissions.
+
+
+
+
+Basic Linux Commands for User Creation and Management:
+-----------------------------------------------------
+
+## useradd <user-name> ------> useradd charitha  {charitha user is created.. this is the command used to create a user}
+## userdel <user-name> ------> userdel charitha  {charitha user is deleted}
+## passwd  <user-name> ------> passwd charitha   {to create password for the user}
+## adduser <user-name> ------> adduser charitha  {same as useradd for adding the user.
+                                                  User-friendly version of useradd
+                                                  > Automatically:
+                                                  > Creates home directory
+                                                  > Asks for user details (Full name, phone, etc.)
+                                                  > Sets password during creation.}
+
+>> we can check whether the user is created or not using "cat /etc/passwd" or "vim /etc/passwd".
+>> similarly password info will be provided under the "cat /etc/shadow".
+
+Enforcing password policies:
+---------------------------
+## change -M 90   -------------------> for changing the password.
+## passwd -l <user-name>  -----------> This command is used for locking the user. As an administrative user you found someone is misusing their account
+                                       then to lock that user you can use this command.
+## passwd -u <user-name>  -----------> for unlocking the user.
+
+
+
+
+GROUP IN USER MANAGEMENT:
+-------------------------
+
+A group is just a collection of users.
+
+👉 Instead of giving permissions to each user one by one, we:
+
+  1. Put users into a group
+  2. Give permissions to the group
+  3. All users in that group automatically get those permissions
+     📌 Shortcut idea:
+     User → Group → Permissions
+	 
+	 
+GROUP MANAGEMENT COMMANDS:
+--------------------------
+## groupadd <group-name> ---------> groupadd linux { this command is to add a group}
+## groupdel <group-name> ---------> groupdel linux { To delete the group}
+
+>> Now what if you want to add a user in that linux group.. yes.. there is a command..
+## usermod -aG <group-name> <user-name> ----------> usermod -aG linux charitha -----------> {under linux group charitha user is created}
+
+>> where to checkout whether the group is created or not..
+## cat /etc/group
+
+questions:
+=========
+1. As we know all the user information is under the passwd file.. Now what if passwd file got deleted ..??
+>> There is a shadow file for passwd which is nothing but "passwd-"
+   "ls /etc/passwd-" from this we cna make back up by simply running a command called..
+   "cp /etc/passwd- /etc/passwd"
+   similarly..
+   "ls /etc/shadow-" this is backup for "ls /etc/shadow"
+   "ls /etc/group-" backup for  "ls /etc/group"
+   
+2. what if you forgot your user account password is there a way to restore it ??
+>> No , we cannot restore it back.
+
+
+## ls /etc/sudoers
+ 👉 It shows detailed information about the /etc/sudoers file, such as:
+     1.File permissions
+     2.Owner
+     3.Group
+     4.File size
+     5.Last modified date
