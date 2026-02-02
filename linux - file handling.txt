@@ -1,0 +1,210 @@
+FILE HANDLING:
+=============
+
+What is File Handling in Linux?
+In Linux everything is treated as a file
+File handling means:
+> Creating files
+> Viewing files
+> Writing data
+> Reading data
+> Modifying data
+> Deleting files
+> Managing permissions & ownership.
+
+
+FILE MANAGEMENT COMMANDS:
+------------------------
+
+## touch <file-name> ---------------------------> touch abc.txt ---------------------> touch is a command to create an empty file.
+## cp <s-file> destination ---------------------> cp abc.txt /home/charitha----------> copying source file to destination location.It will appear in 
+                                                                                       both source and destination locations.
+## mv <s-file> destination ---------------------> mv abc.txt /home/charitha----------> moving source file to destination location. once the file is  
+                                                                                       moved it will not appear in source location..
+## rm <file-name> ------------------------------> rm abc.txt ------------------------> removing the file.
+
+
+Directory management commands:
+-----------------------------
+
+## mkdir <dir-name> ---------------------------> mkdir dir1 -------------------------> mkdir is a command to create an empty directory. dir1 directory
+                                                                                       is created.
+## cp <s-dir> destination ---------------------> cp dir1 /tmp -----------------------> for copying the directory from source to destination location.
+## mv <s-dir> destination ---------------------> mv dir1 /tmp -----------------------> moving directory from source to destination. In source location 
+                                                                                       the directory will be deleted.
+## rm -rf <dir-name> --------------------------> rm -rf dir1 ------------------------> we have to do a forceble delete to remove the directory.
+## rmdir <dir-name> ---------------------------> rmdir dir1 -------------------------> same like rm -rf for removing the directory.
+
+
+Editing the files:
+----------------- 
+
+🟢 VIM EDITOR:
+--------------
+1️⃣ What is Vim?
+
+ Vim = Vi Improved
+ Vim is a command-line based text editor used mainly in Linux/Unix systems to create and edit files.
+✔ Very fast
+✔ Available in almost every Linux server
+✔ Widely used by system admins & DevOps engineers
+
+Opening the file in vim:
+------------------------
+## vim file.txt ---------------------------> If file exists → opens it
+                                             If not → creates new file
+											 
+Vim Modes (MOST IMPORTANT 🔥):
+------------------------------
+Vim works in modes.
+
+🧠 There are 3 main modes:
+                                   
+Mode	                  Purpose
+--------------------------------------------------
+Normal mode	              Navigation & commands (You cannot type text here..Used for navigation..Press Esc → Normal mode)
+Insert mode	              Writing text          (press i to insert.. escape button for exiting the insert mode)
+Command mode	          Save, quit, search    (Used for saving, quitting, searching..Enter command mode ":")
+	
+	
+2⃣ Saving & Exiting (VERY IMPORTANT 🔥)
+
+>> Command      	Meaning
+-------------------------------------------------
+## :w ----------->	Save
+## :q ----------->	Quit
+## :wq ---------->	write & quit
+## :x ----------->  write and quit similar to :wq
+## :q! ---------->	force quit without saving
+## :w! ---------->  Force save
+
+
+3⃣ Navigation Commands
+
+>> Key	             Action
+-------------------------------------------------
+## h ------------>	Left
+## b ------------>  Left move but word to word
+## B ------------>  Left move word to word ignores punctuation
+## l ------------>	Right
+## w ------------>  right move word to word
+## W ------------>  right move word to word ignores punctuation
+## j ------------>	Down
+## k ------------>	Up
+## gg ----------->	Go to top
+## G ------------>	Go to bottom
+## 0 ------------>	Line start
+## $ ------------>	Line end
+
+
+4️⃣  Text maipulation commands
+
+>> command          Meaning
+--------------------------------------------------
+## i ------------>  insert before cursor
+## I ------------>  insert at start of the line
+## a ------------>  insert after cursor
+## A ------------>  insert at the end of the line
+## o ------------>  add new line below the cursor
+## O ------------>  add new line above the cursor
+## ea ----------->  insert at the end of the line
+## esc ---------->  Exit the insert mode
+## u ------------>  undo
+## ctrl --------->  redo
+
+
+5️⃣  Text manipulation content
+
+>> command          Meaning
+--------------------------------------------------
+## y ------------>  yank /copying
+## yy ----------->  copy the line
+## yw ----------->  copy a word
+## y$ ----------->  copy to end of line
+## P ------------>  paste after cursor
+## p ------------>  paste before cursor
+## dd ----------->  delete
+## dw ----------->  delete a word
+## D ------------>  delete to end of the line
+## x ------------>  delete character
+## /string ------>  search for string
+
+
+6  Viual mode (for selection purpose)
+
+>> command          Meaning
+---------------------------------------------------
+## v ------------>  enter visual mode
+## V ------------>  enter linewise visual mode
+## ctrl --------->  start visual block mode
+## > ------------>  shift text left
+## < ------------>  shift text right
+## >> ----------->  shift left by shift width
+## << ----------->  shift right by shift width
+## == ----------->  auto-indent line
+## ~ ------------>  change case
+## esc ---------->  exit visual mode
+## :set nu ------>  this command is for setting the numbers
+
+
+
+
+FILE PERMISSIONS MANAGEMENT:
+---------------------------
+
+File permission management means:
+> Who can read, write, or run a file or folder in Linux..Linux is a multi-user OS (many users can use the same system).
+  So Linux must protect files from unauthorized access.
+
+
+Three Types of Users in Linux
+
+Every file/folder has 3 user categories:
+
+Symbol    User Type	     Meaning
+----------------------------------------------
+ u	      User	         Owner of the file
+ g	      Group	         Group members
+ o	      Others  	     Everyone else
+
+Example:
+
+> You create a file → you = user
+> Your team = group
+> Rest of the system = others
+
+>> In linux there are some default file permissions..If our company wants to change or if we want change any permissions there are some basic commands.. 
+
+3️⃣ Three Types of Permissions
+
+Linux supports only 3 permissions:
+
+Symbol	    Permission	    Meaning
+-------------------------------------------------
+ r	         Read	        View file content
+ w	         Write	        Modify / delete file
+ x	         Execute	    Run the file
+ 
+>> Checking Permissions – ls -l
+   Command:ls -l
+
+>> Understanding Permission Format:
+   --------------------------------
+   u-user    g-group   o-others      {-rwxrwxrwx-->this is a file, drwxrwxrwx---> this is a directory}
+    rwx       rwx        rwx
+	421       421        421
+	 7         7          7
+	 
+>> So, you can manage the permissions oo files and folders using chmod command..
+## chmod 777 filename.txt ----------------> In this case you have given all read write and execute permissions to the user ,group and others..
+## chmod u=rwx,g=rwx,o=rwx filename ------> you can use the both methods... 
+
+>> And you can change the ownership using chown command..
+
+format : -rwxrw-r-- charitha charitha 0 feb1 filename 
+>> here, charitha user and charitha group has all the ownership permissions.. so now if i want to change these permissions i can use chown command
+
+## chown cherry:cherry filename
+
+>> ownership is changed from charitha user and group to the cherry user and group..
+
