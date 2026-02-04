@@ -1,0 +1,182 @@
+PROCESS MANAGEMENT:
+==================
+
+A process is a running instance on any program..
+Eg: 1.Running a python application
+    2.shell script everything is a process..
+
+👉 Simple meaning
+------------------
+A process is a program that is currently running.
+
+Program on disk → just a file (sleeping 😴)
+Program in RAM + CPU executing → process (working 🏃️)
+
+>> As a linux administrator you'll perform three things in process management
+   1. view /check
+   2. kill/stop/pause
+   3. prior/deprior
+
+## Now let's say you are running a python application and it utilized 90% of data, you have to run other processes too.. Now what will
+   you do??
+   
+   👉 first you have to view the process
+   👉 Then kill or stop the process for a while
+   
+>> VIEW:  you can view the procee using the command ##ps
+   ----- 
+          ##ps aux   :    It actually list out all the processes.
+		  ##ps aux | nl : It will list out all the processes and also gives the line number so that we can understand how many processes were
+		                   actually there.
+		  ##ps aux | wc -l : It also works the same..
+	
+	      Is there any other way for checking the process ?? yup..
+		  ##ps -ef      : It is also for listing out the processes
+		  ##ps -ef | nl : same as ps aux | nl 
+		 
+		Then charitha what is the difference ?? 
+		## ps aux will show more details of the process like it will include cpu utilization and mem utilization along with processID
+		   where the command ##ps -ef will not show these things it only shows the PID of the process.
+>> What is this PID (process ID):
+   PID is a unique identification number of any process..
+
+Till now we saw how to check or view any process.. Now let's go to the next step which is killing the process..
+
+>> Kill /stop : Before killing the process you should know why to kill any process??
+   ------------ 
+                Sometimes, some process might hang the complete linux system such processes should be killed to make other process to 
+				utilize the cpu and memory..
+
+>> How to kill a process ??
+   
+   ## kill <process-ID>
+ 
+>> If you want to see a particular processID you can just grep it..
+   
+   ## ps aux | grep <name of the process>
+
+>> If you just kill the the process using ##kill <PID> it will not remove process from the list.. what you have to do to kill it completely..
+   you just have to do the force kill using the command..
+
+   ## kill -9 <PID> -----------> force kill {like pulling the power cable (force stop no explanation)
+   ## kill -3 <PID> -----------> stop working and tell me what you exactly doing (commonly used in java applications).
+   
+>> Sometimes you don't want to kill the process you just wants to stop the process and start it once the things got settle down ..
+
+   ## kill -stop <PID> --------> To stop the process.
+   ## kill -cont <PID> --------> continue the process..
+  
+This is how we can kill any process..
+
+>> Prior and de-prior : prioritizing and deprioritizing the process.
+   ------------------
+   ## renice -n 10 -p <PID>
+   
+       -n              10  (means it'll take from)
+	   -19             20
+        |               |
+	more prority     less priority  
+    (Prior)           (Deprior)
+
+   ## renice -n 10 -p <PID> ---------> this is (+10) positive number .. so it'll lessen the priority (deprior)
+   ## renice -n -5 -p <PID> ---------> -ve number it is for prior the process..
+   
+>> we need to be very careful while using this command.. try to use it only when you know what are all the processes running .. don't 
+   use it simple have to be careful..
+   
+There is another imp concept --> services 
+
+process ---------------> services --------------> background -----------------> boot of the server
+                 services are special            services are background        they will start while booting the server
+				 processes on linux server       processes
+
+>> Difference between process and service is services are special kind of processes and they'll  run in the background and when your system 
+   restarts services start automatically but not the process.
+   
+   
+>> Evary process will have it own parent process..
+
+What is a Zombie Process? (Super Simple)
+---------------------------------------
+
+>> A Zombie process is a process that:
+  ✅ Finished its work
+  ❌ But still exists in the process table
+
+>>In short:
+  Dead process… but its entry is still there ☠️
+  
+ Use    :         ##ps aux 
+ At stat colum : z or z+ it is a zombie process.
+ 
+❓ Why Linux Keeps Zombie Processes
+
+>> Linux needs to tell parent:
+   How child exited
+   Success or failure
+
+Until parent collects this info:
+👉 Zombie stays
+
+>> This Zombie process should be killed otherwise it'll not let other processes to process..
+
+
+👶 What is an Orphan Process?
+------------------------------
+>> An orphan process is:
+   A process whose parent has died, but the child is still running
+
+What Linux does?
+  > Linux is kind 😄
+  > It reassigns the orphan to:
+    systemd (PID 1)
+  So the process can continue safely.
+
+Orphan Example (Step-by-Step)
+-----------------------------
+
+1️⃣ Parent process starts a child
+2️⃣ Parent dies first
+3️⃣ Child is still running
+4️⃣ Linux says:
+
+“Come here, I’ll be your new parent”
+
+➡️ Child becomes orphan, adopted by PID 1
+
+📌 Important:
+👉 Orphan is ALIVE and RUNNING
+
+
+❓ Can Orphan Become Zombie?
+----------------------------
+❌ Direct answer: NO
+>> Because:
+   Orphan = still running
+   Zombie = already finished
+   A running process cannot be a zombie.
+   
+
+⚠️ Where Confusion Comes From (Important!)
+------------------------------------------
+This CAN happen 👇
+
+1️⃣ Child process becomes orphan
+2️⃣ Orphan continues running
+3️⃣ Orphan finishes execution
+4️⃣ New parent = systemd
+5️⃣ systemd immediately calls wait()
+
+➡️ Result:
+   Process is cleaned instantly
+   NO zombie remains
+
+So:
+  Orphan dies cleanly, not as zombie
+ 
+ 🧠 Interview Gold Line ⭐
+ -------------------------
+ An orphan process is a running process whose parent has terminated, while a zombie process is a terminated process whose parent has 
+ not collected its exit status. An orphan does not become a zombie because it is adopted by systemd, which properly reaps it.
+ 
+ 
