@@ -1,0 +1,204 @@
+Step 1: Update your server
+--------------------------
+
+Always start clean.
+
+## sudo apt update -y
+## sudo apt upgrade -y
+
+
+(For Amazon Linux)
+
+## sudo yum update -y
+
+Step 2: Install Nginx (Web Server)
+----------------------------------
+
+Ubuntu / Debian
+## sudo apt install nginx -y
+
+Amazon Linux
+## sudo yum install nginx -y
+
+Step 3: Start & Enable Nginx
+----------------------------
+
+## sudo systemctl start nginx
+## sudo systemctl enable nginx
+
+
+Check status:
+
+## sudo systemctl status nginx
+
+
+You should see: active (running) ✅
+
+Step 4: Open Firewall / Security Group
+--------------------------------------
+
+If on Cloud (AWS EC2 / Azure / GCP)
+
+Open port 80 (HTTP) in the security group:
+
+Type: HTTP
+
+Port: 80
+
+Source: 0.0.0.0/0
+
+If using UFW (Ubuntu)
+sudo ufw allow 'Nginx Full'
+sudo ufw reload
+
+Step 5: Test Default Website
+----------------------------
+
+Open browser:
+
+##http://<your-server-public-ip>
+
+
+You should see:
+
+Welcome to nginx!
+
+🎉 Nginx is working!
+
+Step 6: Create Your Own Website Files
+-------------------------------------
+
+Go to web root directory
+## cd /var/www/
+
+If that root directory is not available create one ## sudo mkdir /var/www/
+
+
+Create a folder for your site:
+-----------------------------
+
+## sudo mkdir mysite
+
+
+Give permission:
+---------------
+
+## sudo chown -R $USER:$USER /var/www/mysite
+
+Step 7: Create HTML File
+------------------------
+
+## cd /var/www/mysite
+## vim index.html creating a html file
+
+Paste this:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Website</title>
+</head>
+<body>
+    <h1>🎉 Website Hosted Successfully!</h1>
+    <p>This site is hosted on Linux using Nginx.</p>
+</body>
+</html>
+
+
+Save:
+
+press esc --> :wq {to write and quit}
+
+
+Step 8: Configure Nginx for Your Site
+-------------------------------------
+
+Create a config file:
+
+sudo nano /etc/nginx/sites-available/mysite
+
+
+Paste this:
+
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/mysite;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+Step 9: Enable the Site
+-----------------------
+
+>> enabling the site means making your website use your config file so your website becomes active.
+
+why we do this??
+
+>> Make Nginx read your config file.
+>> Make website to go live.
+>> Make it open in browser.
+>> Apply changes like new port, new root folder, new domain.
+
+without enabling Nginx keeps using those old settings.
+
+>> On some devices like Ubuntu this is done by linking
+## sudo ln -s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/
+
+but in Amazon linux , normally you don't use sites enabled..
+
+Instead /etc/nginx/conf.d/ is already enabled.. how can you check it?? you can simply run ## cd /etc/nginx then do ##ls
+ 
+>> Then run this command ## sudo vim /etc/nginx/conf.d/mysite.conf
+
+command explanation:
+-------------------
+/etc/nginx/conf.d --> Nginx folder where we store custom site configs
+mysite.conf ---> this is the config file name..  .conf = config file
+
+Inside it we wrote:
+
+server {
+    listen 85;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+
+This code helps Nginx how to run the website..
+
+
+Remove default site:
+
+sudo rm /etc/nginx/sites-enabled/default
+
+
+Test config:
+
+## sudo nginx -t --> It checks if your config is correct or wrong then reload nginx..
+
+
+Reload Nginx:
+------------
+
+sudo systemctl reload nginx
+
+Step 10: Access Your Website 🎯
+------------------------------
+
+Open browser:
+
+http://<your-server-public-ip>
+
+
+You should now see your custom website 🎉
