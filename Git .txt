@@ -1,0 +1,238 @@
+1. Introduction to Git
+======================
+Git is a Distributed Version Control System (DVCS) used to track changes in source code during software development.
+
+It allows developers to:
+
+>> Track file changes
+>> Work collaboratively
+>> Maintain project history
+>> Revert to previous versions
+>> Manage multiple development branches
+
+Git was created by **Linus Torvalds in 2005...
+
+
+
+2. Version Control System (VCS)
+-------------------------------
+>> A Version Control System records changes to files over time so you can recall specific versions later.
+
+Types of VCS
+1. Local Version Control System
+-------------------------------
+>> Stores versions on the local machine.
+
+Example:
+File_v1
+File_v2
+File_v3
+
+2. Centralized Version Control System
+-------------------------------------
+All developers connect to a central server.
+
+Examples:
+SVN
+CVS
+
+3. Distributed Version Control System
+-------------------------------------
+Every developer has a complete copy of the repository.
+
+Example:
+Git
+
+Advantages:
+Faster operations
+Offline work possible
+Better collaboration...
+
+
+
+3. Git Architecture
+===================
+Git works with three main areas:
+
+>> Working Directory --> The working directory contains actual project files.
+       ↓
+>> Staging Area -------> The staging area is an intermediate area where changes are prepared before committing.
+       ↓
+>> Repository  --------> The repository stores all committed project versions
+
+## Git repository is stored in a hidden folder:
+  .git
+  
+Flow Diagram:
+-------------
+
+Working Directory
+      │
+      │ git add
+      ▼
+Staging Area
+      │
+      │ git commit
+      ▼
+Local Repository
+      │
+      │ git push
+      ▼
+Remote Repository
+
+----------------------------------------------------------
+Installing Git:
+## sudo apt install git
+
+Check installation:
+## git --version
+
+Git Configuration
+Before using Git, configure username and email.
+
+Set Username
+## git config --global user.name "YourName"
+
+Set Email
+## git config --global user.email "your@email.com"
+
+Check Configuration
+## git config --list
+
+Creating a Git Repository
+To initialize a new repository:
+## git init
+
+This creates:
+.git
+
+---------------------------------------------------------
+Git Status
+Displays the current state of the repository.
+
+Command:
+## git status
+
+
+Adding Files to Staging Area
+
+Add Single File
+## git add filename {adds a particular file} or git add . {that will add all the files present in the current folder}
+
+
+Git Commit
+A commit saves a snapshot of the project.
+## git commit -m "commit message"
+
+--------------------------------------------------------
+Viewing Commit History
+## git log
+
+Short version:
+## git log --oneline
+
+Git Difference
+Shows differences between file versions.
+## git diff
+
+Git Clone
+Copies a remote repository to your local system.
+## git clone repository_url
+
+-------------------------------------------------------
+Git Remote Repository
+A remote repository is stored on a server.
+
+Check remote:
+## git remote -v
+
+Add remote repository:
+## git remote add origin repository_url
+
+-------------------------------------------------------
+Git Push
+Uploads local commits to remote repository.
+
+Command:
+## git push origin main
+
+Where:
+
+origin = remote repository
+main = branch name
+
+
+Git Pull
+Downloads latest changes from remote repository.
+
+Command:
+## git pull
+
+--------------------------------------------------------
+Git Branching
+
+Branches allow developers to work on different features independently.
+
+Example:
+main
+ ├── login-feature
+ └── payment-feature
+ 
+Create Branch
+## git branch branch_name
+
+List Branches
+## git branch
+
+Switch Branch
+## git checkout branch_name
+
+Create and Switch Branch
+## git checkout -b branch_name
+
+---------------------------------------------------------
+Git Merge
+
+Combines branches.
+## git merge branch_name
+
+Git Stash
+Temporarily saves uncommitted changes.
+
+Command:
+## git stash
+
+Git Revert
+Reverts a specific commit safely.
+## git revert commit_id
+
+----------------------------------------------------------
+
+Git File States
+
+Files in Git have four states:
+
+Untracked
+Modified
+Staged
+Committed
+
+
+Workflow:
+
+Untracked → git add → Staged
+Staged → git commit → Committed
+
+
+Importance of Git in DevOps
+
+Git is widely used in DevOps pipelines with tools like:
+Jenkins
+Docker
+Kubernetes
+Terraform
+
+Git helps automate:
+CI/CD pipelines
+Infrastructure management
+Team collaboration
