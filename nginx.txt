@@ -1,0 +1,240 @@
+Deployed Personal Portfolio Resume Website using Nginx on AWS EC2
+
+Because it highlights:
+✅ personal portfolio
+✅ nginx
+✅ AWS EC2 (good for recruiters/interviewers)
+
+
+This project demonstrates deployment of a responsive personal portfolio website using HTML, CSS, Nginx, and AWS EC2 (Amazon Linux).
+
+code:
+-----
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sree Charitha | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f8fafc;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+/* Header */
+header{
+    background:#0f172a;
+    color:white;
+    padding:25px 0;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+}
+
+header h1{
+    font-size:36px;
+    letter-spacing:1px;
+}
+
+header p{
+    color:#cbd5e1;
+    margin-top:8px;
+    font-size:18px;
+}
+
+/* Navbar */
+nav{
+    margin-top:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 18px;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+/* Sections */
+section{
+    padding:80px 20px;
+    max-width:1000px;
+    margin:auto;
+}
+
+/* Cards */
+.card{
+    background:white;
+    padding:45px;
+    border-radius:16px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* Headings */
+h2{
+    color:#0f172a;
+    font-size:30px;
+    margin-bottom:25px;
+    border-left:6px solid #38bdf8;
+    padding-left:15px;
+}
+
+/* Paragraph */
+p{
+    margin-bottom:15px;
+    font-size:17px;
+}
+
+/* List */
+ul{
+    padding-left:25px;
+}
+
+li{
+    margin-bottom:12px;
+    font-size:17px;
+}
+
+/* Projects */
+.project{
+    margin-top:25px;
+    padding:20px;
+    background:#f1f5f9;
+    border-radius:10px;
+}
+
+/* Footer */
+footer{
+    text-align:center;
+    background:#0f172a;
+    color:white;
+    padding:25px;
+    margin-top:60px;
+}
+
+/* Mobile */
+@media(max-width:768px){
+    header h1{
+        font-size:28px;
+    }
+
+    nav a{
+        display:block;
+        margin:10px 0;
+    }
+
+    .card{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Sree Charitha Nalladimmu</h1>
+    <p>AWS & DevOps Engineer</p>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#profile">Profile</a>
+        <a href="#skills">Skills</a>
+        <a href="#declaration">Declaration</a>
+    </nav>
+</header>
+
+<section id="home">
+    <div class="card">
+        <h2>Home</h2>
+        <p><b>Phone:</b> 7702947242</p>
+        <p><b>Email:</b> sreecharitha079@gmail.com</p>
+        <p><b>Location:</b> Vinjamur, Nellore, India</p>
+    </div>
+</section>
+
+<section id="profile">
+    <div class="card">
+        <h2>Profile</h2>
+        <p>
+            Passionate AWS and DevOps Engineer with strong knowledge in cloud infrastructure,
+            CI/CD pipelines, Linux administration, Docker, and automation.
+        </p>
+
+        <h2>Education</h2>
+        <p>B.Tech in Electronics & Communication Engineering</p>
+        <p>Sree Venkateswara College of Engineering</p>
+        <p>2021 – 2025 | CGPA: 8.0</p>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="card">
+        <h2>Skills</h2>
+        <ul>
+            <li>AWS Cloud</li>
+            <li>Linux Administration</li>
+            <li>Docker</li>
+            <li>Jenkins</li>
+            <li>Git & GitHub</li>
+            <li>Python Basics</li>
+        </ul>
+
+        <h2>Projects</h2>
+
+        <div class="project">
+            <h3>IoT Based Smart Attendance System Using Keypad</h3>
+            <p>Designed and implemented smart attendance automation using IoT.</p>
+        </div>
+
+        <div class="project">
+            <h3>Automatic Water Sprinkling System</h3>
+            <p>Built sensor-based automated fire response water sprinkler.</p>
+        </div>
+    </div>
+</section>
+
+<section id="declaration">
+    <div class="card">
+        <h2>Declaration</h2>
+        <p>
+            I hereby declare that all information provided above is true
+            and accurate to the best of my knowledge.
+        </p>
+        <br>
+        <p><b>Sree Charitha</b></p>
+    </div>
+</section>
+
+<footer>
+    © 2026 Sree Charitha | Portfolio Website
+</footer>
+
+</body>
+</html>
